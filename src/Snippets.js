@@ -13,7 +13,7 @@ const Snippets = {
 		nonce = undefined,
 		source,
 	}) {
-		if (!id) warn('GTM Id is required')
+		if (!id) warn('GTM ID is required')
 
 		const url = new URL(source)
 		const environment =
@@ -26,18 +26,12 @@ const Snippets = {
 				height="0" width="0" style="display:none;visibility:hidden" id="tag-manager"></iframe>`
 
 		const script = `
-			(function(w,d,s,l,i){w[l]=w[l]||[];
-				w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'}${
-					events.length > 0
-						? ',' + JSON.stringify(events).slice(1, -1)
-						: ''
-				});
-				var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';
-				j.async=true;
-				j.src='${source}?id='+i+dl+'${environment}';
-				${nonce ? `j.setAttribute('nonce','${nonce}');` : ''}
-				f.parentNode.insertBefore(j,f);
-			})(window,document,'script','${dataLayerName}','${id}');`
+			window.dataLayer = window.dataLayer || [];
+			function gtag(){
+				dataLayer.push(arguments);
+			}
+			gtag('js', new Date());
+			gtag('config', '${id}');`
 
 		const dataLayerVar = this.dataLayer(dataLayer, dataLayerName)
 

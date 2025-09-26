@@ -44,7 +44,7 @@ const TagManager = {
 		auth = undefined,
 		preview = undefined,
 		nonce = undefined,
-		source = 'https://googletagmanager.com/gtm.js',
+		source = 'https://www.googletagmanager.com/gtag/js?id=' + gtmId,
 	}) {
 		const gtm = this.gtm({
 			id: gtmId,
